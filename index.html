@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio de evidencias del curso AWS de Victor Hernández" />
+  <title>Victor Hernández | Portafolio AWS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0c192b;
+      --surface: #102238;
+      --surface-2: #142b45;
+      --text: #f4f7fb;
+      --muted: #9fb0c3;
+      --aws: #ff9900;
+      --aws-soft: #ffb84d;
+      --blue: #33b8ff;
+      --line: rgba(255,255,255,.10);
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(51,184,255,.12), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(255,153,0,.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    button, input, textarea { font: inherit; }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      background: rgba(7,17,31,.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: #111;
+      background: linear-gradient(145deg, var(--aws), #ffd27f);
+      box-shadow: 0 8px 24px rgba(255,153,0,.24);
+    }
+
+    .brand span:last-child { color: var(--aws); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 600;
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 130px 0 80px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 92px 4% auto auto;
+      width: min(540px, 48vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,153,0,.20), rgba(51,184,255,.06) 45%, transparent 70%);
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,153,0,.28);
+      color: var(--aws-soft);
+      background: rgba(255,153,0,.08);
+      font-size: .86rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+
+    .hero h1 strong {
+      display: block;
+      color: var(--aws);
+      font-weight: 800;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 660px;
+      margin: 24px 0 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--aws); color: #111; border-color: var(--aws); }
+    .btn-secondary { background: rgba(255,255,255,.04); }
+    .btn-secondary:hover { border-color: rgba(255,153,0,.55); }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .portrait-card {
+      width: min(430px, 100%);
+      aspect-ratio: 1 / 1.08;
+      border-radius: 38px;
+      padding: 24px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.025)),
+        var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portrait-card::before,
+    .portrait-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .portrait-card::before {
+      width: 240px;
+      height: 240px;
+      right: -70px;
+      top: -70px;
+      background: rgba(255,153,0,.15);
+    }
+
+    .portrait-card::after {
+      width: 180px;
+      height: 180px;
+      left: -60px;
+      bottom: -60px;
+      background: rgba(51,184,255,.13);
+    }
+
+    .portrait-inner {
+      height: 100%;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, #0e1b2d, #18314d);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-inline: auto;
+      background: linear-gradient(145deg, var(--aws), #ffd27f);
+      color: #101820;
+      font-size: 4rem;
+      font-weight: 800;
+      border: 8px solid rgba(255,255,255,.08);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+
+    .portrait-label { margin-top: 24px; }
+    .portrait-label strong { display: block; font-size: 1.3rem; }
+    .portrait-label span { color: var(--muted); }
+
+    .floating-chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 15px;
+      border-radius: 14px;
+      background: rgba(16,34,56,.95);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      font-size: .86rem;
+      font-weight: 700;
+      z-index: 3;
+    }
+
+    .chip-one { left: -25px; top: 18%; }
+    .chip-two { right: -26px; bottom: 18%; }
+    .floating-chip i { color: var(--aws); }
+
+    section { padding: 96px 0; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--aws);
+      font-size: .82rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -.045em;
+      line-height: 1.1;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.14);
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,153,0,.48);
+      background: linear-gradient(145deg, rgba(255,153,0,.09), rgba(255,255,255,.025));
+      box-shadow: 0 24px 55px rgba(0,0,0,.24);
+    }
+
+    .panel p { color: var(--muted); margin: 0; }
+    .panel strong {
+      color: var(--text);
+      transition: color .3s ease;
+    }
+
+    .panel:hover strong { color: var(--aws-soft); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      transition: transform .32s ease, border-color .32s ease, box-shadow .32s ease;
+    }
+
+    .stat::before {
+      content: "";
+      position: absolute;
+      inset: -120% auto auto -45%;
+      width: 90%;
+      height: 280%;
+      transform: rotate(24deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+      transition: left .55s ease;
+      pointer-events: none;
+    }
+
+    .stat:hover {
+      transform: translateY(-8px) scale(1.025);
+      border-color: rgba(255,153,0,.55);
+      box-shadow: 0 18px 40px rgba(0,0,0,.24);
+    }
+
+    .stat:hover::before { left: 125%; }
+
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+      color: var(--aws);
+      transition: transform .3s ease, text-shadow .3s ease;
+    }
+
+    .stat:hover strong {
+      transform: translateX(4px);
+      text-shadow: 0 0 22px rgba(255,153,0,.38);
+    }
+
+    .stat span { color: var(--muted); font-size: .9rem; }
+
+    .carousel-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform .55s cubic-bezier(.2,.75,.2,1);
+    }
+
+    .slide {
+      min-width: 100%;
+      padding: 3px;
+    }
+
+    .project-card {
+      min-height: 480px;
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .project-image {
+      min-height: 480px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      background:
+        linear-gradient(145deg, rgba(255,153,0,.16), rgba(51,184,255,.08)),
+        #0b1728;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .project-image::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,153,0,.11);
+      top: -80px;
+      right: -70px;
+    }
+
+    .project-icon {
+      width: 180px;
+      height: 180px;
+      border-radius: 36px;
+      display: grid;
+      place-items: center;
+      background: rgba(7,17,31,.72);
+      border: 1px solid var(--line);
+      font-size: 5rem;
+      color: var(--aws);
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-icon-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 24px;
+      font-size: 2.7rem;
+    }
+
+    .project-icon-group i:nth-child(2) {
+      color: var(--blue);
+    }
+
+    .project-icon-group i {
+      transition: transform .3s ease, filter .3s ease;
+    }
+
+    .project-icon-group i:hover {
+      transform: translateY(-8px) scale(1.16) rotate(-4deg);
+      filter: drop-shadow(0 10px 14px rgba(255,153,0,.28));
+    }
+
+    .project-icon-group i:nth-child(2) {
+      color: var(--blue);
+    }
+
+    .project-icon-group i:nth-child(3) {
+      color: var(--text);
+    }
+
+    .project-content {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-number { color: var(--aws); font-weight: 800; letter-spacing: .12em; font-size: .78rem; }
+    .project-content h3 { margin: 8px 0 14px; font-size: 2rem; letter-spacing: -.035em; }
+    .project-content p { margin: 0 0 24px; color: var(--muted); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,153,0,.23);
+      background: rgba(255,153,0,.07);
+      color: var(--aws-soft);
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: default;
+      transition: transform .28s ease, background .28s ease, border-color .28s ease, box-shadow .28s ease, color .28s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-5px) scale(1.08);
+      background: rgba(255,153,0,.17);
+      border-color: var(--aws);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(255,153,0,.18);
+    }
+
+    .project-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .project-links .btn { min-height: 44px; padding-inline: 16px; font-size: .9rem; }
+
+    .carousel-controls {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .carousel-buttons { display: flex; gap: 10px; }
+    .round-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: .25s ease;
+    }
+    .round-btn:hover { border-color: var(--aws); color: var(--aws); transform: translateY(-2px); }
+
+    .dots { display: flex; gap: 8px; }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      cursor: pointer;
+      transition: .25s ease;
+      padding: 0;
+    }
+    .dot.active { width: 28px; background: var(--aws); }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .roadmap-card {
+      padding: 26px;
+      border-radius: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .roadmap-card:hover { transform: translateY(-7px); border-color: rgba(255,153,0,.45); }
+    .roadmap-card i { color: var(--aws); font-size: 1.8rem; }
+    .roadmap-card h3 { margin: 18px 0 9px; }
+    .roadmap-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 30px;
+      padding: 42px;
+      border-radius: 28px;
+      background: linear-gradient(120deg, rgba(255,153,0,.15), rgba(51,184,255,.09));
+      border: 1px solid var(--line);
+    }
+    .contact-box h2 { margin: 0 0 8px; }
+    .contact-box p { margin: 0; color: var(--muted); }
+
+    footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .socials { display: flex; gap: 16px; }
+    .socials a { color: var(--muted); transition: .2s; }
+    .socials a:hover { color: var(--aws); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .75s ease, transform .75s cubic-bezier(.2,.75,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats .stat:nth-child(2) { transition-delay: .08s; }
+    .stats .stat:nth-child(3) { transition-delay: .16s; }
+    .stats .stat:nth-child(4) { transition-delay: .24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .project-card, .contact-box { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-copy { max-width: 100%; }
+      .hero-visual { margin-top: 10px; }
+      .project-image { min-height: 310px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .project-card { min-height: 0; }
+      .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-box { text-align: center; }
+      .contact-box .btn { justify-self: center; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+
+    @media (max-width: 740px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px;
+        background: rgba(12,25,43,.98);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.active { display: flex; }
+      .nav-links a { display: block; padding: 13px 14px; border-radius: 10px; }
+      .nav-links a:hover { background: rgba(255,255,255,.04); }
+      .hero { padding-top: 115px; }
+      .hero h1 { font-size: clamp(2.7rem, 14vw, 4.5rem); }
+      .portrait-card { width: min(390px, 92%); }
+      .chip-one { left: -5px; }
+      .chip-two { right: -5px; }
+      .project-content { padding: 30px 24px; }
+      .roadmap-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      section { padding: 76px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions, .project-links { flex-direction: column; }
+      .hero-actions .btn, .project-links .btn { width: 100%; }
+      .floating-chip { display: none; }
+      .avatar { width: 145px; height: 145px; font-size: 3rem; }
+      .portrait-card { aspect-ratio: 1 / 1.15; }
+      .stats { grid-template-columns: 1fr; }
+      .project-icon { width: 145px; height: 145px; font-size: 4rem; }
+      .carousel-controls { align-items: flex-end; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="brand-badge"><i class="fa-brands fa-aws"></i></span>
+        <span>VH · AWS</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#entregas">Entregas</a></li>
+        <li><a href="#aprendizaje">Aprendizaje</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><i class="fa-solid fa-cloud"></i> Portafolio de evidencias</div>
+        <h1>Victor Hernández <strong>AWS Data</strong></h1>
+        <p class="hero-copy">
+          Espacio dedicado a documentar mis prácticas, entregas y aprendizajes durante el curso de Amazon Web Services. Aquí podrás consultar cada actividad, su objetivo y el resultado obtenido.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#entregas"><i class="fa-solid fa-layer-group"></i> Ver entregas</a>
+          <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Presentación visual del portafolio">
+        <div class="portrait-card">
+          <div class="portrait-inner">
+            <div>
+              <div class="avatar">VH</div>
+              <div class="portrait-label">
+                <strong>Victor Hernández</strong>
+                <span>Java Developer · AWS Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-chip chip-one"><i class="fa-brands fa-aws"></i> Cloud Practitioner</div>
+        <div class="floating-chip chip-two"><i class="fa-solid fa-code"></i> Evidencias técnicas</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="sobre-mi">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Presentación</div>
+            <h2>Sobre este portafolio</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <article class="panel reveal">
+            <p>
+              Soy <strong>Victor Hernández</strong>, desarrollador Java Full Stack Jr. con interés en backend, infraestructura y servicios en la nube. Este portafolio reúne las actividades realizadas durante mi formación en AWS y muestra mi progreso de forma clara, visual y ordenada.
+            </p>
+          </article>
+
+          <div class="stats">
+            <div class="stat reveal"><strong>01</strong><span>Curso AWS</span></div>
+            <div class="stat reveal"><strong>100%</strong><span>Responsivo</span></div>
+            <div class="stat reveal"><strong>GitHub</strong><span>Despliegue Pages</span></div>
+            <div class="stat reveal"><strong>+</strong><span>Entregas escalables</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="entregas">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Evidencias</div>
+            <h2>Entregas del curso</h2>
+          </div>
+          
+        </div>
+
+        <div class="carousel-shell">
+          <div class="carousel-track" id="carouselTrack">
+            <article class="slide">
+              <div class="project-card reveal">
+                <div class="project-image">
+                  <div class="project-icon project-icon-group" aria-label="Amazon EC2, Jupyter Notebook y SSH">
+                    <i class="fa-brands fa-aws" title="Amazon EC2"></i>
+                    <i class="fa-brands fa-python" title="Jupyter Notebook y Python"></i>
+                    <i class="fa-solid fa-terminal" title="SSH"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 01</span>
+                  <h3>Análisis de ventas en una instancia EC2</h3>
+                  <p>
+                    Práctica en la que configuré una instancia de Amazon EC2, me conecté al servidor
+                    mediante SSH y ejecuté Jupyter Notebook para trabajar con Python y analizar datos
+                    de ventas desde un entorno desplegado en la nube.
+                  </p>
+                  <div class="tags">
+                    <span class="tag">Amazon EC2</span>
+                    <span class="tag">Jupyter Notebook</span>
+                    <span class="tag">SSH</span>
+                    <span class="tag">Python</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="https://victormanuelhdez.github.io/portafolio/Tarea1.html">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 02</span>
+                  <h3>Título de la entrega 02</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 03</span>
+                  <h3>Título de la entrega 03</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 04</span>
+                  <h3>Título de la entrega 04</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 05</span>
+                  <h3>Título de la entrega 05</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 06</span>
+                  <h3>Título de la entrega 06</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 07</span>
+                  <h3>Título de la entrega 07</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 08</span>
+                  <h3>Título de la entrega 08</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 09</span>
+                  <h3>Título de la entrega 09</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+
+            <!--
+            <article class="slide">
+              <div class="project-card">
+                <div class="project-image">
+                  <div class="project-icon">
+                    <i class="fa-solid fa-cloud"></i>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <span class="project-number">ENTREGA 10</span>
+                  <h3>Título de la entrega 10</h3>
+                  <p>Describe aquí el objetivo, los servicios utilizados y el resultado de la actividad.</p>
+                  <div class="tags">
+                    <span class="tag">Servicio AWS</span>
+                    <span class="tag">Tecnología</span>
+                    <span class="tag">Concepto</span>
+                  </div>
+                  <div class="project-links">
+                    <a class="btn btn-primary" href="#">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver entrega
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-github"></i> Código
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+-->
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <div class="dots" id="carouselDots" aria-label="Navegación del carrusel"></div>
+          <div class="carousel-buttons">
+            <button class="round-btn" id="prevBtn" aria-label="Entrega anterior"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="round-btn" id="nextBtn" aria-label="Entrega siguiente"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aprendizaje">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Ruta</div>
+            <h2>Áreas de aprendizaje</h2>
+          </div>
+        </div>
+
+        <div class="roadmap-grid">
+          <article class="roadmap-card reveal"><i class="fa-solid fa-cloud"></i><h3>Fundamentos Cloud</h3><p>Modelos de servicio, responsabilidad compartida, regiones y alta disponibilidad.</p></article>
+          <article class="roadmap-card reveal"><i class="fa-solid fa-network-wired"></i><h3>Redes</h3><p>VPC, subredes, tablas de ruteo, grupos de seguridad y conectividad.</p></article>
+          <article class="roadmap-card reveal"><i class="fa-solid fa-server"></i><h3>Cómputo</h3><p>EC2, escalabilidad, balanceadores y despliegue de aplicaciones.</p></article>
+          <article class="roadmap-card reveal"><i class="fa-solid fa-box-archive"></i><h3>Almacenamiento</h3><p>S3, EBS, políticas de acceso y ciclo de vida de objetos.</p></article>
+          <article class="roadmap-card reveal"><i class="fa-solid fa-database"></i><h3>Bases de datos</h3><p>RDS, DynamoDB y selección de soluciones según el caso de uso.</p></article>
+          <article class="roadmap-card reveal"><i class="fa-solid fa-shield-halved"></i><h3>Seguridad</h3><p>IAM, roles, permisos, autenticación y buenas prácticas de protección.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2>¿Quieres revisar el código?</h2>
+            <p>Consulta el repositorio completo y el historial de cambios desde GitHub.</p>
+          </div>
+          <a class="btn btn-primary" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Abrir repositorio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Victor Hernández · Portafolio AWS</span>
+      <div class="socials">
+        <a href="https://github.com/Victormanuelhdez" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/victor-hernandez-javadev/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:victormanuelhernandez.hdez01@gmail.com" aria-label="Correo"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', open);
+      menuToggle.innerHTML = open
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    // Animaciones de entrada al hacer scroll
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+
+    const track = document.getElementById('carouselTrack');
+    const slides = [...track.children];
+    const dotsContainer = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+    let autoPlay;
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = `dot${index === 0 ? ' active' : ''}`;
+      dot.setAttribute('aria-label', `Ir a la entrega ${index + 1}`);
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = [...dotsContainer.children];
+
+    function goToSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+      restartAutoPlay();
+    }
+
+    function restartAutoPlay() {
+      clearInterval(autoPlay);
+      autoPlay = setInterval(() => goToSlide(currentIndex + 1), 7000);
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', event => touchStartX = event.touches[0].clientX, { passive: true });
+    track.addEventListener('touchend', event => {
+      const distance = touchStartX - event.changedTouches[0].clientX;
+      if (Math.abs(distance) > 45) goToSlide(currentIndex + (distance > 0 ? 1 : -1));
+    }, { passive: true });
+
+    restartAutoPlay();
+  </script>
+</body>
+</html>
