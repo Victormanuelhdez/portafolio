@@ -381,6 +381,13 @@
       transition: transform .32s ease, border-color .32s ease, box-shadow .32s ease;
     }
 
+    .stat-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     .stat::before {
       content: "";
       position: absolute;
@@ -622,9 +629,14 @@
       border-top: 1px solid var(--line);
     }
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .socials { display: flex; gap: 16px; }
-    .socials a { color: var(--muted); transition: .2s; }
-    .socials a:hover { color: var(--aws); }
+    .socials { display: flex; gap: 20px; align-items: center; }
+    .socials a {
+      color: var(--muted);
+      transition: .2s;
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+    .socials a:hover { color: var(--aws); transform: translateY(-2px); }
 
     /* ANIMACIONES DE ENTRADA */
     .reveal {
@@ -785,10 +797,10 @@
           </article>
 
           <div class="stats">
-            <div class="stat reveal"><strong>05</strong><span>Entregas visibles</span></div>
-            <div class="stat reveal"><strong>100%</strong><span>Responsivo</span></div>
-            <div class="stat reveal"><strong>GitHub</strong><span>Despliegue Pages</span></div>
-            <div class="stat reveal"><strong>+</strong><span>Entregas escalables</span></div>
+            <a class="stat stat-link reveal" href="#entregas" aria-label="Ir a entregas"><strong>05</strong><span>Entregas visibles</span></a>
+            <a class="stat stat-link reveal" href="#contacto" aria-label="Ir a contacto"><strong>Contacto</strong><span>Ir a la parte de abajo</span></a>
+            <a class="stat stat-link reveal" href="https://github.com/Victormanuelhdez/portafolio" target="_blank" rel="noopener noreferrer" aria-label="Abrir repositorio en GitHub"><strong>GitHub</strong><span>Despliegue Pages</span></a>
+            <a class="stat stat-link reveal" href="https://github.com/Victormanuelhdez/portafolio/tree/main/Constancias%20de%20cursos" target="_blank" rel="noopener noreferrer" aria-label="Abrir constancias de cursos"><strong>+</strong><span>Constancias de cursos</span></a>
           </div>
         </div>
       </div>
